@@ -36,12 +36,4 @@ public class ReadCoilsResponse extends ReadResponse {
     public byte getFunctionCode() {
         return FunctionCode.READ_COILS;
     }
-
-    @Override
-    public String toString() {
-        return "ReadCoilsResponse [exceptionCode=" + exceptionCode + ", slaveId=" + slaveId + ", getFunctionCode()="
-                + getFunctionCode() + ", isException()=" + isException() + ", getExceptionMessage()="
-                + getExceptionMessage() + ", getExceptionCode()=" + getExceptionCode() + ", toString()="
-                + super.toString(false) + "]";
-    }
 }

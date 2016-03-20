@@ -36,12 +36,4 @@ public class ReadDiscreteInputsResponse extends ReadResponse {
     public byte getFunctionCode() {
         return FunctionCode.READ_DISCRETE_INPUTS;
     }
-
-    @Override
-    public String toString() {
-        return "ReadDiscreteInputsResponse [exceptionCode=" + exceptionCode + ", slaveId=" + slaveId
-                + ", getFunctionCode()=" + getFunctionCode() + ", isException()=" + isException()
-                + ", getExceptionMessage()=" + getExceptionMessage() + ", getExceptionCode()=" + getExceptionCode()
-                + super.toString(false) + "]";
-    }
 }

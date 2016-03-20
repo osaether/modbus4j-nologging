@@ -2,8 +2,6 @@ package com.serotonin.modbus4j.sero.messaging;
 
 import java.io.IOException;
 
-import com.serotonin.modbus4j.sero.io.StreamUtils;
-import com.serotonin.modbus4j.sero.log.BaseIOLog;
 import com.serotonin.modbus4j.sero.timer.SystemTimeSource;
 import com.serotonin.modbus4j.sero.timer.TimeSource;
 import com.serotonin.modbus4j.sero.util.queue.ByteQueue;
@@ -34,7 +32,6 @@ public class MessageControl implements DataConsumer {
     private int discardDataDelay = 0;
     private long lastDataTimestamp;
 
-    private BaseIOLog ioLog;
     private TimeSource timeSource = new SystemTimeSource();
 
     private final WaitingRoom waitingRoom = new WaitingRoom();
@@ -85,14 +82,6 @@ public class MessageControl implements DataConsumer {
         this.discardDataDelay = discardDataDelay;
     }
 
-    public BaseIOLog getIoLog() {
-        return ioLog;
-    }
-
-    public void setIoLog(BaseIOLog ioLog) {
-        this.ioLog = ioLog;
-    }
-
     public TimeSource getTimeSource() {
         return timeSource;
     }
@@ -107,8 +96,6 @@ public class MessageControl implements DataConsumer {
 
     public IncomingResponseMessage send(OutgoingRequestMessage request, int timeout, int retries) throws IOException {
         byte[] data = request.getMessageData();
-        if (DEBUG)
-            System.out.println("MessagingControl.send: " + StreamUtils.dumpHex(data));
 
         IncomingResponseMessage response = null;
 
@@ -153,10 +140,6 @@ public class MessageControl implements DataConsumer {
      * Incoming data from the transport. Single-threaded.
      */
     public void data(byte[] b, int len) {
-        if (DEBUG)
-            System.out.println("MessagingConnection.read: " + StreamUtils.dumpHex(b, 0, len));
-        if (ioLog != null)
-            ioLog.input(b, 0, len);
 
         if (discardDataDelay > 0) {
             long now = timeSource.currentTimeMillis();
@@ -206,8 +189,6 @@ public class MessageControl implements DataConsumer {
     }
 
     private void write(byte[] data) throws IOException {
-        if (ioLog != null)
-            ioLog.output(data);
 
         synchronized (transport) {
             transport.write(data);

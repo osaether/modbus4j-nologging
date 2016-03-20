@@ -22,7 +22,6 @@ package com.serotonin.modbus4j.msg;
 
 import com.serotonin.modbus4j.base.ModbusUtils;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
-import com.serotonin.modbus4j.sero.io.StreamUtils;
 import com.serotonin.modbus4j.sero.util.queue.ByteQueue;
 
 abstract public class ReadResponse extends ModbusResponse {
@@ -63,12 +62,5 @@ abstract public class ReadResponse extends ModbusResponse {
 
     public boolean[] getBooleanData() {
         return convertToBooleans(data);
-    }
-
-    public String toString(boolean numeric) {
-        if (data == null)
-            return "ReadResponse [null]";
-        return "ReadResponse [len=" + (numeric ? data.length / 2 : data.length * 8) + ", " + StreamUtils.dumpHex(data)
-                + "]";
     }
 }

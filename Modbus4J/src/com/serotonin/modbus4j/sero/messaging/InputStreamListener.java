@@ -3,7 +3,6 @@ package com.serotonin.modbus4j.sero.messaging;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class provides a stoppable listener for an input stream that sends arbitrary information. A read() call to an
@@ -77,9 +76,9 @@ public class InputStreamListener implements Runnable {
                 }
                 catch (IOException e) {
                     consumer.handleIOException(e);
-                    if (StringUtils.equals(e.getMessage(), "Stream closed."))
+                    if (e.getMessage().equals("Stream closed."))
                         break;
-                    if (StringUtils.contains(e.getMessage(), "nativeavailable"))
+                    if (e.getMessage().equals("nativeavailable"))
                         break;
                 }
             }

@@ -20,9 +20,6 @@
  */
 package com.serotonin.modbus4j.serial;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
 import com.serotonin.modbus4j.sero.messaging.EpollStreamTransportCharSpaced;
@@ -31,8 +28,6 @@ import com.serotonin.modbus4j.sero.messaging.Transport;
 
 abstract public class SerialMaster extends ModbusMaster {
 	
-	
-	private final Log LOG = LogFactory.getLog(SerialMaster.class);
 	//These options are no longer supported as they were originally a hack that didn't work right anyway
 	@Deprecated
     public static final int SYNC_TRANSPORT = 1;
@@ -76,7 +71,7 @@ abstract public class SerialMaster extends ModbusMaster {
         try {
 			wrapper.close();
 		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
+			//LOG.error(e.getMessage(), e);
 		}
     }
 }

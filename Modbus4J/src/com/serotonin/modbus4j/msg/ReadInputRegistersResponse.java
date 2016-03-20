@@ -36,12 +36,4 @@ public class ReadInputRegistersResponse extends ReadResponse {
     public byte getFunctionCode() {
         return FunctionCode.READ_INPUT_REGISTERS;
     }
-
-    @Override
-    public String toString() {
-        return "ReadInputRegistersResponse [exceptionCode=" + exceptionCode + ", slaveId=" + slaveId
-                + ", getFunctionCode()=" + getFunctionCode() + ", isException()=" + isException()
-                + ", getExceptionMessage()=" + getExceptionMessage() + ", getExceptionCode()=" + getExceptionCode()
-                + ", toString()=" + super.toString(true) + "]";
-    }
 }

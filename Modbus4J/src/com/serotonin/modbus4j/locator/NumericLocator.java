@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.serotonin.modbus4j.code.DataType;
 import com.serotonin.modbus4j.code.RegisterRange;
 import com.serotonin.modbus4j.exception.IllegalDataTypeException;
@@ -50,7 +48,14 @@ public class NumericLocator extends BaseLocator<Number> {
         if (range == RegisterRange.COIL_STATUS || range == RegisterRange.INPUT_STATUS)
             throw new IllegalDataTypeException("Only binary values can be read from Coil and Input ranges");
 
-        if (!ArrayUtils.contains(DATA_TYPES, dataType))
+        boolean type_found = false;
+        for (int i = 0; i < DATA_TYPES.length; i++) {
+            if (dataType == DATA_TYPES[i]) {
+                type_found = true;
+                break;
+            }
+        }
+        if (!type_found)
             throw new IllegalDataTypeException("Invalid data type");
     }
 

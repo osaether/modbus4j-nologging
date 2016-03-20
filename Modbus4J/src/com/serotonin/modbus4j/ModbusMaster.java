@@ -52,7 +52,6 @@ import com.serotonin.modbus4j.msg.WriteMaskRegisterRequest;
 import com.serotonin.modbus4j.msg.WriteRegisterRequest;
 import com.serotonin.modbus4j.msg.WriteRegistersRequest;
 import com.serotonin.modbus4j.sero.epoll.InputStreamEPollWrapper;
-import com.serotonin.modbus4j.sero.log.BaseIOLog;
 import com.serotonin.modbus4j.sero.messaging.MessageControl;
 import com.serotonin.modbus4j.sero.util.ArrayUtils;
 import com.serotonin.modbus4j.sero.util.ProgressiveTask;
@@ -81,7 +80,6 @@ abstract public class ModbusMaster extends Modbus {
     private boolean multipleWritesOnly;
 
     private int discardDataDelay = 0;
-    private BaseIOLog ioLog;
 
     /**
      * An input stream ePoll will use a single thread to read all input streams. If multiple serial or TCP modbus
@@ -274,14 +272,6 @@ abstract public class ModbusMaster extends Modbus {
             this.discardDataDelay = discardDataDelay;
     }
 
-    public BaseIOLog getIoLog() {
-        return ioLog;
-    }
-
-    public void setIoLog(BaseIOLog ioLog) {
-        this.ioLog = ioLog;
-    }
-
     public InputStreamEPollWrapper getePoll() {
         return ePoll;
     }
@@ -320,7 +310,6 @@ abstract public class ModbusMaster extends Modbus {
         conn.setTimeout(getTimeout());
         conn.setDiscardDataDelay(getDiscardDataDelay());
         conn.setExceptionHandler(getExceptionHandler());
-        conn.setIoLog(ioLog);
         return conn;
     }
 
